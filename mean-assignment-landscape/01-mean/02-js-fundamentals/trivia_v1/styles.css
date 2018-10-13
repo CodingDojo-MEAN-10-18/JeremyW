@@ -1,0 +1,18 @@
+.question {
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 100%;
+    width: 95%;
+}
+.col-4 {
+    display:inline-block;
+    min-height: 100%;
+    min-width: 15%;
+    vertical-align: top;
+}
+.show {
+    display: block;
+}
+.hidden {
+    display:none;
+}
