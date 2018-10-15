@@ -20,16 +20,16 @@ function updateText(){
     // original code commented out below
     // el.innerHTML = el.innerHTML + words[word_counter][character_counter++];
     if(character_counter == words[word_counter].length + 1){ // added '+ 1' to words[word_counter].length to catch the last char in each array element
-        //choose a different word
+        //  choose a different word
         word_counter++;
         //start over with the first character of the word
         character_counter = 0;
         //set the html to be blank
-        el.innerHTML = ' ';
+        el.innerHTML = '';
         // if we're displaying the last word, go back to the first word
         if(word_counter == words.length){
             word_counter = 0;
         }
     }
 }
-setInterval(updateText,300);
+setInterval(updateText,350);

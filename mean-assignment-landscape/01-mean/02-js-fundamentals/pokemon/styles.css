@@ -20,8 +20,8 @@
 
 .pokemon-img {
     display: inline-block;
-    width: 100px;
-    height: 157px;
+    width: 96px;
+    height: 96px;
     margin: 10px;
     border-radius: 5px;
 }
@@ -29,7 +29,7 @@
 .scroll-button {
     left: 50%;
     top: 50%;
-    transform: translate(0%, -275%);
+    transform: translate(0%, 0%);
     display: inline-block;
     border-radius: 5px;
 }
