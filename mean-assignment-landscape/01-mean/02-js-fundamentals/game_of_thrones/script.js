@@ -35,6 +35,8 @@ $(document).ready(function () {
             $('#info-name').text(`Name: ${data.name}`);
             $('#info-words').text(`Words: ${data.words}`);
             $('#info-titles').html(`Titles: ${data.titles}`);
+            $('#info-founded').html(`Founded: ${data.founded}`);
+            $('#info-ancestral-weapons').html(`Ancestral Weapons: ${data.ancestralWeapons}`);
         });
     });
 

@@ -38,6 +38,9 @@
     width: 18px;
 }
 
+#info-name, #info-words, #info-titles, #info-founded, #info-ancestral-weapons {
+    font-size: 1em;
+}
 
 #info-area {
 margin: 10px auto;
