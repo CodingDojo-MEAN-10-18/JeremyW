@@ -6,14 +6,14 @@ function forInLoopDisplay(array){
         console.log('Array index is: ' + array[index])
     }
 }
-console.log(forInLoopDisplay(array1));
+// console.log(forInLoopDisplay(array1));
 
 function forOfLoopDisplay(array) {
     for (var element of array) {
         console.log('Array element is: ' + element)
     }
 }
-console.log(forOfLoopDisplay(array1));
+// console.log(forOfLoopDisplay(array1));
 
 function forOfLoopDisplay2(array) {
     for(var element of array.entries()){
@@ -34,23 +34,34 @@ function forOfLoopDisplay3(array) {
 let person = {
     'name': 'Jeremy',
     'age': 43,
-    'hair': 'brown',
     'height': 72
 }
 
-person.weight = 175;
+person['weight'] = 175;
+person['hair'] = 'brown'
 
 function showPerson(object){
     for(let key in person){
-        console.log('key => ', key + ', ' + person[key]);
+        console.log('key => ', key + ': ' + person[key]);
     }
 }
-showPerson(person);
+// showPerson(person);
 
-function sayHello(){
-    var newScope = 'This is the scope content';
-    console.log('Say hello: ', newScope);
-    return newScope;
+function sayHello1() {
+    var childContent = 'This is the child content';
+    console.log(childContent);
+    // console.log(`${childContent}`);
+    // return childContent;
 }
-console.log(sayHello());
-sayHello();
+// sayHello1();
+// console.log(sayHello1());
+// sayHello1(12345);                // can pass any number of arguments but function does not actually accept it.
+// console.log(sayHello1(12345));   // the same is true for this function call
+
+function sayHello2(someValue, ...rest) {  // using a ...rest parameter in this example
+    var childContent = 'This is the child content';
+    // console.log(arguments);  // don't need this to console.log arguments when using ...rest parameter instead
+    console.log(childContent + ', arg passed to function: ' + someValue, rest);
+}
+// sayHello2();                // can pass any number of arguments, now the function can accept it
+// console.log(sayHello2(12345, 'some stuff', true, [], {}));

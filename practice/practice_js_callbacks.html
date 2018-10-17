@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+        // Assignment: Callbacks
+        // Objectives:
+        // 1   Understand the difference between synchronous and asynchronous code.
+        // 2.  Understand what a callback is and what it is used for.
+        var ninja = 'Libby';
+        setTimeout(function () { console.log(ninja); }, 2000); // run the function defined after 2000 milliseconds
+        console.log(ninja);
+
+        console.log("NOW: ");
+        console.log("Declaring and assigning variable 'ninja'.");
+        var ninja = 'Libby';
+        setTimeout(function myCallbackFunction() {
+            console.log("LATER: ")
+            console.log(ninja, "LATER");
+        }, 2000
+        );
+        console.log("Printing ninja value.");
+        console.log(ninja, "NOW");
+
+        
+        var a = 2;
+        var b = function () { console.log("something"); };
+        function doSomething(x) {
+            console.log(typeof (x));
+        }
+        doSomething(a);
+        doSomething(b);
+
+
+        function makePasta(pasta, makeSauce) {
+            console.log("Boiling water");
+            console.log("Putting " + pasta + " pasta in the water");
+            console.log("Pasta is done!");
+            return pasta + " Pasta! Voila!";
+        }
+        makePasta("Penne");
+        makePasta("Farfalle");
+    </script>
+</body>
+</html>

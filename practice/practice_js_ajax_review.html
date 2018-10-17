@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax and APIs - Ajax Review</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <script type="text/javascript">
+    // Assignment: AJAX Review
+    // Objectives:
+    // 1.  Review AJAX and identify the callback and the asynchronous code in a typical AJAX request.
+    // 2.  Understand why callbacks are used.
+    // 3.  Explore the roles of the call stack, task queue, and event loop to better understand how we should approach asynchronous code.
+
+    // $(document).ready(function () {
+    //    var favoritePokemon;
+    //    // the given link is for Bulbasaur's information
+    //    $.get("https://pokeapi.co/api/v2/pokemon/1/", function (data) {
+    //        favoritePokemon = data.name;
+    //    });
+    //    console.log("Got my favorite Pokemon", favoritePokemon);      // Predict the output!
+    // });
+
+    $(document).ready(function () {
+        var favoritePokemon;
+        // the given link is for Bulbasaur's information
+        $.get("https://pokeapi.co/api/v2/pokemon/1/", function (data) {
+            favoritePokemon = data.name;
+            console.log("Got my favorite Pokemon", favoritePokemon);      // Predict the output!
+        });
+    });
+
+    var secondFavorite;
+    // let's use setTimeout to simulate an API call that takes 0 seconds to complete
+    setTimeout(function () { secondFavorite = "charmander"; }, 2000);
+    console.log("Got my second favorite", secondFavorite);
+
+    </script>
+</body>
+</html>
