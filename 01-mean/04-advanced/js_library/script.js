@@ -1,4 +1,11 @@
-//Can we make this into a method of an object?
+// Assignment I: JavaScript Library
+// Finish the five methods attached to the _ object to create your own custom library.  
+// The purpose of this assignment is to show how a simple JavaScript library can be made. 
+
+// One important concept that we want you to learn through this assignment is how to pass data to and from callbacks. 
+// You pass data to a callback with a parameter and you pass data from the callback back to the parent function with a return. 
+// While you are going through this assignment pay close attention to this relationship.
+
 function each(array, callback) {
     // loop through the array
     for(var index = 0; index < array.length; i++) {
@@ -26,7 +33,6 @@ var _ = {
     },
     find: function(array, find) {
         // code here;
-        let temp = [];
         for(var i = 0; i < array.length; i++){
             if(find(array[i])) {
                 return array[i];
