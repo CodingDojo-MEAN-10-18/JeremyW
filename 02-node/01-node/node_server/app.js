@@ -1,7 +1,9 @@
 // Practice - Create a node server
-var my_module = require('./my_module');
+var my_module = require('./my_module')();     //notice the extra invocation parentheses!
+console.log(my_module);
 my_module.greet();
 my_module.add(5,6);
+
 
 // get the http module:
 var http = require('http');
@@ -9,7 +11,8 @@ var http = require('http');
 var fs = require('fs');
 
 // creating a server using http module:
-var server = http.createServer(function (request, response){
+var server = http.createServer(function (request, response){ 
+    console.log('hello');
     // see what URL the clients are requesting:
     console.log('client request URL: ', request.url);
     // this is how we do routing:
