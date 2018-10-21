@@ -9,15 +9,20 @@
 const _ = {
     map: function(array, callback) {
         //code here;
+        let temp = [];
         for(let i = 0; i < array.length; i++){
-            array[i] = callback(array[i]);
+            temp.push(callback(array[i]));
         }
+        return temp;
     },
     reduce: function(array, callback, memo) { 
         // code here;
-        // let el = 0;
-        if(!memo){ memo = array[0]; }
-        for(let i = 0; i < array.length; i++){
+        let el = 0;
+        if(!memo){ 
+            memo = array[0];
+            el = 1;
+        }
+        for(let i = el; i < array.length; i++){
             memo = callback(array[i], memo);
         }
         return memo;
@@ -52,24 +57,25 @@ const _ = {
     }
   }
  // you just created a library with 5 methods!
+ // This does NOT work
 const numsArray = [1, 2, 3, 4, 5, 6];
 
-console.log('map: ', _.map(numsArray, function (num){ return num * 3; }));
-// console.log('map: ', numsArray);
+let map = _.map(numsArray, function (num){ return num * 3; });
+console.log('map: ', map);
 // if things are working right, this will return [3,6,9,12,15,18]
 
-console.log('find: ', _.find(numsArray, function (num){ return num % 2 == 0; }));
-// console.log('find: ', find);
-// if things are working right, this will return [21]
+let find = _.find(numsArray, function (num){ return num % 2 == 0; });
+console.log('find: ', find);
+// if things are working right, this will return [2]
 
-console.log('filter: ', _.filter(numsArray, function (num){ return num % 2 == 0; }));
-// console.log('filter: ', filter);
+let filter = _.filter(numsArray, function (num){ return num % 2 == 0; });
+console.log('filter: ', filter);
 // if things are working right, this will return [2,4,6]
 
-console.log('reject: ', _.reject(numsArray, function(num){ return num % 2 == 0; }));
-// console.log('reject: ', reject);
+let reject = _.reject(numsArray, function(num){ return num % 2 == 0; });
+console.log('reject: ', reject);
 // if things are working right, this will return [1,3,5]
 
-console.log('reduce: ', _.reduce(numsArray, function(num, memo){ return num + memo; }, 0));
-// console.log('reduce: ', reduce);
-// if things are working right, this will return [21]
+let reduce = _.reduce(numsArray, function(num, memo){ return num + memo; }, 2);
+console.log('reduce: ', reduce);
+// if things are working right, this will return [23]

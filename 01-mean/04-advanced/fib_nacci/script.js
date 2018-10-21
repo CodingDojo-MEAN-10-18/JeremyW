@@ -24,7 +24,7 @@ function fib1() {
     return nacci;
 }
 
-var fibCounter = fib1();
+// var fibCounter = fib1();
 
 function fib2(){
     let prev = 0;
