@@ -1,7 +1,7 @@
 function orderSupplies(item) {
-    let warehouse;  //  undefined
+    let warehouse; //  undefined
     const deliveryTime = Math.random() * 3000;
-
+  
     return new Promise(function (resolve, reject) {
         setTimeout(function() {
             warehouse = {
@@ -12,7 +12,7 @@ function orderSupplies(item) {
                 brush: {
                     product: 'Horsehair brush',
                     directions: function() { return 'start painting!' }
-                },
+                }, 
                 tarp: {
                     product: 'A large tarp',
                     directions: function() { return 'cover the floor' }
@@ -32,15 +32,16 @@ function orderSupplies(item) {
 const paint = orderSupplies('paint');
 const brush = orderSupplies('brush');
 const tarp = orderSupplies('tarp');
-const roller = orderSupplies('roller')
+const roller = orderSupplies('roller');
 
 Promise.all([tarp, paint, brush, roller])
     .then(function (items){
         items.forEach(receivedItem);
     })
     .catch(function (error) {
-        console.log(error.message)
+        console.log(error.message);
     });
+
 
 // tarp
 //     .then(function (item) {
@@ -56,60 +57,52 @@ Promise.all([tarp, paint, brush, roller])
 //         return roller;
 //     })
 //     .then(receivedItem)
-//     .catch(function (error) {
+//     .catch(function (error){
 //         console.log(error.message);
 //     });
 
-//   orderSupplies('paint', function(item){
-//       receivedItem(item);
+// orderSupplies('paint', function (item) {
+//     receivedItem(item);
 //     orderSupplies('brush', receivedItem);
-//   });
+// })
 
 function receivedItem(item) {
-    console.log(`Received ${ item.product }. Time to ${ item.directions() }`);
+    console.log(`Received ${ item.product }, time to ${ item.directions() }`);
 }
 
-// let havePaint = false;
-// orderSupplies('paint', function(item){
-//     receivedItem(item);
-//     havePaint = true;
-// });
+let havePaint = false;
+orderSupplies('paint', function (item) {
+    receivedItem(item);
+    havePaint = true;
+});
 
-// orderSupplies('brush', function(item){
+// orderSupplies('brush', function (item) {
 //     if(havePaint){
 //         receivedItem(item);
 //     } else {
-//         const timer = setInterval(function () {
-//             console.log('...checking for paint....');
+//         const timer = setInterval(function() {
+//             console.log('checking for paint... ');
 //             if(havePaint){
+//                 receivedItem(item);
 //                 clearInterval(timer);
-//                 return receivedItem(item);
 //             }
-//         }, 50);
+//         }, 100)
 //     }
-// })
+// });
 
 // orderSupplies('brush', handleBrush);
 
 // function handleBrush(item){
-//     console.log('...checking for paint');
+//     console.log('checking for paint', item);
 //     if(havePaint){
 //         return receivedItem(item);
 //     }
-//     setTimeout(handleBrush, 50, item);
-// }
-
-// function handleBrush(item){
-//     console.log('...checking for paint');
-//     if(havePaint){
-//         return receivedItem(item);
-//     });
-//     setTimeout(function (){
+//     setTimeout(function () {
 //         handleBrush(item);
 //     }, 50);
 // }
 
-// const things = ['paint', 'brush'];
+// const things = ['tarp', 'paint', 'brush'];
 
 // function order(items){
 //     const received = [];
@@ -129,3 +122,11 @@ function receivedItem(item) {
 //     }
 // }
 // order(things);
+
+// const paint = new Promise(function (resolve, reject) {
+//     orderSupplies('paint', resolve);
+// });
+
+// const brush = new Promise(function (resolve, reject) {
+//     orderSupplies('brush', resolve);
+// });

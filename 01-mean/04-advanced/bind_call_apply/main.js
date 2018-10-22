@@ -39,5 +39,5 @@ $(document).ready(function(){
         language: 'JavaScript'
     };
     // levelUp.call(person);
-    levelUp(person);
+    levelUp.call(person);
 });

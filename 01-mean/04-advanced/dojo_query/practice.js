@@ -9,9 +9,9 @@
 // Make sure you wrap your code in an immediate function
 
 const $Dojo = function(elementId){
-    // return immediate function
+    // return an immediate function
     return (function($dojo){
-        // get DOM object with id
+        // get the DOM object with id
         $dojo.someId = document.getElementById(elementId);
 
         // use callback when the element is clicked
@@ -20,12 +20,12 @@ const $Dojo = function(elementId){
         };
 
         // use callback function when hovering in or out
-        $dojo.hover = function(hoverin, hoverout){
-            this.someId.addEventListener('mouseover', hoverin);
-            this.someId.addEventListener('mouseout', hoverout);
+        $dojo.hover = function (hoverin, hoverout){
+            this.someId = addEventListener('mouseover', hoverin);
+            this.someId = addEventListener('mouseout', hoverout);
         };
 
         // return the element
-        return $dojo;
+        return $dojo
     })({});
 };
