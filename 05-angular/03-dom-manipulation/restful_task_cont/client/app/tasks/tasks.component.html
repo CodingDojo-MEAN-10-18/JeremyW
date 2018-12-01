@@ -1,0 +1,30 @@
+<h1>
+  Welcome to {{ title }}!
+</h1>
+<fieldset>
+  <legend>Tasks</legend>
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Status (complete)</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks" (click)="getTask(task)">
+        <td>{{ task.title }}</td>
+        <!-- <td>{{ task.description }}</td>
+        <td>{{ task.completed }}</td>
+        <td>{{ task.createdAt | date:'medium' }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+<div class="row strong border-box" *ngIf="selectedTask">
+  <div class="col-3">{{ selectedTask.title }}</div>
+  <div class="col-3">{{ selectedTask.description }}</div>
+  <div class="col-3">{{ selectedTask.completed }}</div>
+  <div class="col-3">{{ selectedTask.createdAt | date:'medium' }}</div>
+</div>

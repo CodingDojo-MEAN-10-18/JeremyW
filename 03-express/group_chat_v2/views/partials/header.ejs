@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Assignment - Express JS - <%= title %></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.slim.js" integrity="sha256-0YA7ixx4+I4GrLichcjWSQHIUSQiI8ojTDqsK7AZ5zU=" crossorigin="anonymous"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="/css/styles.css"> -->
+        <script type="text/javascript">
+            $(document).ready(() => {
+              var socket = io.connect();
+              var current_user;
+          
+              var new_user = () => {
+                var name = prompt("Please enter your name to chat");
+                socket.emit("page_load", {user: name});
+              }
+          
+              new_user();
+          
+              socket.on('existing_user', (data) => {
+                $("#error").html(data.error)
+                new_user();
+              })
+          
+              socket.on('load_messages', (data) => {
+                $("#error").html("") //resetting the error message
+                current_user = data.current_user;
+                var messages = data.messages;
+                var messageThread = '';
+          
+                for (let i = 0; i < messages.length; i++){
+                  messageThread += "<p>" + messages[i].name + ": " + messages[i].message + "</p>";
+                }
+          
+                $("#message_board").append(messageThread);
+              })
+          
+              $("#new_message").submit(function(){
+                socket.emit('new_message', {message: $("#message").val(), user: current_user})
+                return false;
+              });
+          
+              socket.on("post_new_message", function(data) {
+                $("#message_board").append("<p>" + data.user + ": " + data.new_message + "</p>");
+              })
+            })
+            </script>
+    </head>
+    <body>
+        <div class="container">

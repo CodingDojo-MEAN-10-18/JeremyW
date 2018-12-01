@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Assignment - Express JS - <%= title %></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script><!-- jQuery -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49' crossorigin='anonymous'></script> <!-- Popper -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script><link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css'> <!-- jQueryUI -->
+        <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script> <!-- jQueryUI -->
+        <!-- <script src="/js/script.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.slim.js" integrity="sha256-0YA7ixx4+I4GrLichcjWSQHIUSQiI8ojTDqsK7AZ5zU=" crossorigin="anonymous"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="/css/styles.css"> -->
+        <script type="text/javascript">
+            $(document).ready(() => {
+                $('#main').hide();
+                var socket = io();
+                socket.emit('all');
+                $("#login").click(function(){
+                    socket.emit('signed_on', $("#name").val());
+                    $('#main').show("slow");
+                    $('#sign').hide();
+                })
+                socket.on('all', function(users_arr){
+                    for(let i = 0; i < users_arr.length; i++){
+                        $('#main').html("<div id='" + users_arr[i].socket + "' class='user'><h2 class='gray'>" + users_arr[i].name + "</h2></div>")
+                    }
+                });
+                socket.on("new_user", function(data){
+                    $("<div id='"+data.socket+"' class='user'><h2 class='gray'>"+data.name+"</h2></div>").hide().appendTo('#main').fadeIn();
+                })
+                socket.on("user_disconnect", function(data){
+                    console.log(data);
+                    $('#' +data).fadeOut(700, function() { $(this).remove(); });
+                })
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">

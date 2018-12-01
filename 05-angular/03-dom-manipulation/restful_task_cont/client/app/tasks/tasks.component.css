@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+th, td {
+  width: 24%;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+fieldset, .border-box {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+}

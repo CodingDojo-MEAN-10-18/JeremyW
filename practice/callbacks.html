@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script src="callbacks.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        // assuming you have jQuery
+        // $(document).ready(function(){
+            // var favoritePokemon;
+            // the given link is for Bulbasaur's information
+            // const baseUrl = 'https://pokeapi.co/api/v2/pokemon/1/';
+            // let baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
+            // const id_array = [1,2,3,4,5];
+
+                // for(let index = 0; index < id_array.length; index++){
+                //     let pokemon_id = id_array[index];
+                //     baseUrl += baseUrl + pokemon_id + '/';
+                //     console.log(`Here is the baseUrl var through each iteration: ${baseUrl}`);
+                //     setTimeout(() => {
+                //         $.get(baseUrl, (data) => {
+                //             console.log("Here is the pokemon ID from the array: ", pokemon_id);      // Predict the output!
+                //             favoritePokemon = data.name;
+                //             console.log("Got my favorite Pokemon", favoritePokemon);      // Predict the output!
+                //         });
+                //     }, 500);
+                // }
+
+            // Assignment: Callbacks
+            // Objectives:
+            // 1   Understand the difference between synchronous and asynchronous code.
+            // 2.  Understand what a callback is and what it is used for.
+            // var ninja = 'Libby';
+            // setTimeout(function () { console.log(ninja); }, 2000); // run the function defined after 2000 milliseconds
+            // console.log(ninja);
+
+            // console.log("NOW: ");
+            // console.log("Declaring and assigning variable 'ninja'.");
+            // var ninja = 'Libby';
+            // setTimeout(function myCallbackFunction() {
+                    // console.log("LATER: ")
+                    // console.log(ninja, "LATER");
+                // }, 2000
+            // );
+            // console.log("Printing ninja value.");
+            // console.log(ninja, "NOW");
+
+            
+            // var a = 2;
+            // var b = function () { console.log("something"); };
+            // function doSomething(x) {
+            //     console.log(typeof (x));
+            // }
+            // doSomething(a);
+            // doSomething(b);
+
+
+            // function makePasta(pasta, makeSauce) {
+            //     console.log("Boiling water");
+            //     console.log("Putting " + pasta + " pasta in the water");
+            //     console.log("Pasta is done!");
+            //     return pasta + " Pasta! Voila!";
+            // }
+            // makePasta("Penne");
+            // makePasta("Farfalle");
+        // });
+        </script>
+    </body>
+</html>

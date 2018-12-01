@@ -1,0 +1,105 @@
+// Assignment: Intro to MongoDB
+// For This section, we want you to do the following operations in a MongoDB database.
+// Work with a partner or a small group so everyone gets a chance to collaborate and work as a team.
+// For some of these, you may have to refer to MongoDB's operator documentation.
+// This is one of the most important assignments in this section, make sure you answer all questions and take notes for future assignments.
+
+// 1. Create a database called 'my_first_db'.
+use my_first_db
+
+// 2. Create students collection.
+db.createCollection('students')
+show collections
+
+// 3. Each document you insert into this collection should have the following format: ({name: STRING, home_state: STRING, lucky_number: NUMBER, birthday: {month: NUMBER, day: NUMBER, year: NUMBER}})
+db.students.insert({name: STRING, home_state: STRING, lucky_number: NUMBER, birthday: {month: NUMBER, day: NUMBER, year: NUMBER}})
+
+
+// 4. Create 5 students with the appropriate info.
+db.students.insert({name: 'Jeremy', home_state: 'WA', lucky_number: 11, birthday: {month: 06, day: 26, year: 1975}})
+db.students.insert({name: 'Alex', home_state: 'WA', lucky_number: 12, birthday: {month: 04, day: 08, year: 2001}})
+db.students.insert({name: 'Anika', home_state: 'WA', lucky_number: 21, birthday: {month: 04, day: 16, year: 2004}})
+db.students.insert({name: 'Gordon', home_state: 'WA', lucky_number: 10, birthday: {month: 09, day: 16, year: 1947}})
+db.students.insert({name: 'Mamie', home_state: 'WA', lucky_number: 7, birthday: {month: 02, day: 16, year: 1953}})
+db.students.insert({name: 'Bob', home_state: 'CA', lucky_number: 99, birthday: {month: 05, day: 16, year: 1930}})
+db.students.insert({name: 'Peter', home_state: 'CA', lucky_number: 77, birthday: {month: 07, day: 16, year: 1984}})
+
+// 5. Get all students.
+db.students.find().pretty()
+
+// 6. Retrieve all students who are from California (San Jose Dojo) or Washington (Seattle Dojo).
+db.students.find({home_state: 'WA', home_state: 'CA'}).pretty()
+db.students.find( { $or: [{home_state: 'WA'}, {home_state: 'CA'}] }).pretty()
+
+// 7. Get all students whose lucky number is:
+    // a. greater than 3
+    db.students.find({lucky_number: {$gt: 3}}).pretty()
+
+    // b. less than or equal to 10
+    db.students.find({lucky_number: {$lte: 10}}).pretty()
+
+    // c. between 1 and 9 (inclusive)
+    db.students.find( { $and: [{lucky_number: {$gte: 1}}, {lucky_number: {$lte: 9}}] }).pretty()
+    db.students.find( { lucky_number: { $in: [1, 9] } }).pretty()
+
+// 8. Add a field to each student collection called 'interests' that is an ARRAY.  It should contain the following entries: 'coding', 'brunch', 'MongoDB'. Do this in ONE operation.
+// db.students.update({}, { $set: { 'interests': { $each ['coding', 'brunch', 'Mongodb'] } } }, true, true)  // => did not work
+// db.students.update({}, { $push: { 'interests': {'coding', 'brunch', 'Mongodb'} } })  // => did not work
+db.students.update({}, { $push: { 'interests': { $each: ['coding', 'brunch', 'Mongodb'] } } })  // worked for the first record only
+// db.students.update({}, { $push: { 'interests': { $each: ['coding', 'brunch', 'Mongodb'] } } }, {multi:true})
+db.students.update({}, { $set: { 'interests': ['coding', 'brunch', 'Mongodb'] } },{multi:true})  // platform answer given
+
+
+// 9. Add some unique interests for each particular student into each of their interest arrays.
+db.students.update({name: "Eminem"}, { $push: {interests:{ $each:['rapping', 'Haillie']}} })  // platform given answer
+
+db.students.update({name: 'Jeremy'}, { $push: {'interests': { $each: ['hiking', 'skiing']}}})
+db.students.update({name: 'Alex'}, { $push: {'interests': { $each: ['Arma III', 'robotics']}}})
+db.students.update({name: 'Anika'}, { $push: {'interests': { $each: ['Riverdale', 'hanging out']}}})
+db.students.update({name: 'Gordon'}, { $push: {'interests': { $each: ['car repair', 'gardening']}}})
+db.students.update({name: 'Mamie'}, { $push: {'interests': { $each: ['cooking', 'gardening']}}})
+
+// 10. Add the interest 'taxes' into someone's interest array.
+db.students.update({name: 'Gordon'}, {$push: {'interests': 'taxes'}})
+
+// 11. Remove the 'taxes' interest you just added.
+db.students.update({name: 'Gordon'}, {$pop: {'interests': 1}})
+db.students.update({name: 'Gordon'}, {$pull: {interests: "taxes"}})
+
+db.students.update({name: 'Gordon'}, { $set: { 'interests': ['coding', 'brunch', 'Mongodb'] } },{multi:true})
+
+// 12. Remove all students who are from California (or Washington).
+db.students.remove({home_state: 'CA'})
+
+// 13. Remove a student by name.
+db.students.remove(name: 'Peter');
+
+// 14. Remove a student whose lucky number is greater than 5 (JUST ONE)
+db.students.remove({}, { 'lucky_number': 5 }, true)  // demonstrates the justOne boolean
+
+// 15. Add a field to each student collection called 'number_of_belts' and set it to 0.
+db.students.update({}, { $set: { 'number_of_belts': 0 } }, {multi:true})
+
+// 16. Increment this field by 1 for all students in Washington (Seattle Dojo).
+db.students.update({ 'home_state': 'WA' }, { $inc: { 'number_of_belts': 1 } }, {multi:true})
+
+// 17. Rename the 'number_of_belts' field to 'belts_earned'
+db.students.update({}, { $rename: {'number_of_belts': 'belts_earned' } }, {multi: true})
+
+// 18. Remove the 'lucky_number' field.
+db.students.update({}, { $unset: {'lucky_number': ''} }, {multi:true})
+
+// 19. Add a 'updated_on' field, and set the value as the current date.
+db.students.update({}, { $currentDate: { lastModified: true, 'updated_on': { $type: 'timestamp' } } }, {multi:true})  // works but not what platform requested
+db.students.update({}, { $currentDate: { 'updated_on': true }}, {multi:true})
+
+
+
+db.hops.update({name: 'Chinook'}, { $set: { alpha: {low: 11.5, high: 15 } } })
+db.hops.update({name: 'Centennial Hops'}, { $set: { alpha: {low: 9.5, high: 11.5 } } })
+db.hops.update({name: 'Hallertau Classic'}, { $set: { alpha: {low: 3, high: 5.5 } } })
+db.hops.update({name: 'Cascade'}, { $set: { alpha: {low: 5, high: 9 } } })
+db.hops.update({name: 'Fuggle Hops'}, { $set: { alpha: {low: 3, high: 6 } } })
+db.hops.update({name: 'Magnum'}, { $set: { alpha: {low: 10, high: 15 } } })
+db.hops.update({name: 'Admiral'}, { $set: { alpha: {low: 13, high: 16 } } })
+db.hops.update({name: 'Bravo'}, { $set: { alpha: {low: 15, high: 18 } } })
