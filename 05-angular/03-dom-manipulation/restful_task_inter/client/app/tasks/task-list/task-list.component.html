@@ -1,0 +1,23 @@
+<section class="border-box">
+  <div class="row" >
+    <div class="col">
+      <h3>{{ title }} </h3>
+    </div>
+  </div>
+  <div class="row" *ngIf='tasks?.length > 0'>
+    <div class="col">
+      <button (click)="displayAllTasks(tasks)" class="btn btn-primary purple">GET ALL TASKS</button>
+    </div>
+  </div>
+  <div class="row hide">
+    <div class="col alltasks" *ngFor="let task of tasks">
+      <span>{{ task.title }} </span>
+      <button class="btn btn-primary btn-sm purple" (click)="onSelect(task)">SHOW</button>
+    </div>
+  </div>
+  <!-- <div class="row"
+    *ngFor="let task of tasks"
+    (click)="onSelect(task)"
+    [routerLink]="task._id"> -->
+</section>
+<app-task-detail [task]="selectedTask"></app-task-detail>

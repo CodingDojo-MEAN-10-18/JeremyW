@@ -1,0 +1,12 @@
+<div class="row border-box" *ngIf="task">
+  <div class="col-3 strong">Title</div>
+  <div class="col-3 strong">Description</div>
+  <div class="col-3 strong">Completed (?)</div>
+  <div class="col-3 strong">Date created</div>
+
+  <div class="col-3">{{ task.title }}</div>
+  <div class="col-3">{{ task.description }}</div>
+  <div *ngIf="task.completed === true" class="col-3">Yes</div>
+  <div *ngIf="task.completed !== true" class="col-3">No</div>
+  <div class="col-3">{{ task.createdAt | date:'medium' }}</div>
+</div>

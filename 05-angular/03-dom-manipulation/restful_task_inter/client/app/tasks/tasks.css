@@ -1,0 +1,28 @@
+.strong {
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}
+
+.border-box {
+  border: 2px solid gold;
+  border-radius: 5px;
+  margin: 5px auto;
+  padding: 10px;
+}
+
+.col {
+  display: inline-flex;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.alltasks>span, .alltasks>button {
+
+}
+
+.btn.btn-primary {
+  margin: 5px;
+}
